@@ -58,6 +58,7 @@ int main()
     }
 
 
+
     
     //Cell prova4{18,32};
     //Cell goalprova4{25,30};
@@ -83,6 +84,6 @@ int main()
     //Cell provapostvisione{141, 125};
     //double distanzaobstprovapostvisione;
     //distanzaobstprovapostvisione = provapostvisione.min_distance_actualrobotcell_all_obstacles_cells(dimG, vobs);
-    robot_1.move_robot_to_goal(10000.0, 1.0, 10.0, dimG, vobs);
+    //robot_1.move_robot_to_goal(10000.0, 1.0, 10.0, dimG, vobs);
     
   }

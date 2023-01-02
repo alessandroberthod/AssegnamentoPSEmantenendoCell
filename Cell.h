@@ -12,7 +12,7 @@ class Cell{
 
 public:
     //costruttore e costruttore di default
-    Cell(double xC, double yC);
+    Cell(int xC, int yC);
     Cell();
 
     //funzioni membro, che non modificano l'oggetto
@@ -26,7 +26,7 @@ public:
     Cell path_planning_robot(double _eta, double _zeta, double _max_dist_infl, double dimGrid, const Cell& cgoal, const vector<Obstacle>& vecobst_pp) const;
 
 private:
-    double xC, yC;
+    int xC, yC;
 
 
 };

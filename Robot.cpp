@@ -61,7 +61,7 @@ Obstacle::Obstacle()
 }
 
 //Costruttore cella
-Cell::Cell(double xCe, double yCe)
+Cell::Cell(int xCe, int yCe)
     : xC{xCe}, yC{yCe}
 {
 }
@@ -87,8 +87,8 @@ Cell Robot::Robcellcurrent(double dimGrid)
   	double xRcurrentfz{xRcurrent}; //Variabili fittizie in modo tale che quando chiamo la fz non vario i dati membri dell'oggetto robot anche se non si notava perchè 1 volta ingrigliato l'operazione lo mantiene =
 	double yRcurrentfz{yRcurrent};
 	Cell currRcell;
-	xRcurrentfz = ((static_cast<int>(xRcurrentfz/dimGrid))*dimGrid);
-	yRcurrentfz = ((static_cast<int>(yRcurrentfz/dimGrid))*dimGrid);
+	xRcurrentfz = (static_cast<int>(xRcurrentfz/dimGrid));
+	yRcurrentfz = (static_cast<int>(yRcurrentfz/dimGrid));
 	currRcell = {xRcurrentfz, yRcurrentfz};
 
 	return currRcell;
@@ -101,22 +101,31 @@ Cell Robot::Robcellgoal(double dimGrid)
 	double xRgoalfz{xRgoal};
 	double yRgoalfz{yRgoal};
 	Cell goalRcell;
-	xRgoalfz = ((static_cast<int>(xRgoal/dimGrid))*dimGrid);
-	yRgoalfz = ((static_cast<int>(yRgoal/dimGrid))*dimGrid);
+	xRgoalfz = (static_cast<int>(xRgoal/dimGrid));
+	yRgoalfz = (static_cast<int>(yRgoal/dimGrid));
 	goalRcell = {xRgoalfz, yRgoalfz};
 
 	return goalRcell;
 
 }
 
-//Funzione: adegua le proprietà dell'ostacolo alla dimensione della griglia
+/*double Robot::current_coordinate_x_rob_in_the_cell(double dimGrid)
+{
+	double coord_x_rob, coord_x_rob_in_cell;
+	coord_x_rob = (static_cast<int>(xRcurrent/dimGrid));
+	coord_x_rob_in_cell = Robcell
+
+
+}*/
+
+//Funzione: adegua le proprietà dell'ostacolo alla dimensione della griglia in celle
 void Obstacle::adapt_obstacle_to_grid(double dimGrid) 
 {
 
-	x1 = static_cast<int>((x1/dimGrid))*dimGrid;
-	y1 = static_cast<int>((y1/dimGrid))*dimGrid;
-	x2 = (static_cast<int>((x2/dimGrid))*dimGrid) + dimGrid; //Aggiunta di dimGrid perchè altrimenti avrei ad esempio 25.2 -> 25 mentre 25.2->26, ricordando che cella occupata parzialmente = cella occupata interamente
-	y2 = (static_cast<int>((y2/dimGrid))*dimGrid) + dimGrid;
+	x1 = static_cast<int>((x1/dimGrid));
+	y1 = static_cast<int>((y1/dimGrid));
+	x2 = static_cast<int>((x2/dimGrid)); //Aggiunta di dimGrid perchè altrimenti avrei ad esempio 25.2 -> 25 mentre 25.2->26, ricordando che cella occupata parzialmente = cella occupata interamente
+	y2 = static_cast<int>((y2/dimGrid));
 
 }
 
@@ -130,25 +139,25 @@ vector<Cell> Obstacle::outline_obstacle_cells(double dimGrid) const
 	//Celle del contorno dell'ostacolo aventi stessa x = x1 e y compresa fra y1 e y2
 	for (int i = 0; i <= (y2-y1); ++i)
 	{
-		outline_obstacle_c.push_back(Cell{x1, (y1 + i*dimGrid)});
+		outline_obstacle_c.push_back(Cell{x1, (y1 + i)});
 	}
 
 	//celle del contorno dell'ostacolo aventi stessa y = y2 e x compresa fra x2 e x1
 	for (int i = 1; i < (x2-x1); ++i)
 	{
-		outline_obstacle_c.push_back(Cell{(x1 + i*dimGrid), y2});
+		outline_obstacle_c.push_back(Cell{(x1 + i), y2});
 	}
 
 	//celle del contorno dell'ostacolo avaneti stessa x = x2 e y compresa fra y1 e y2
 	for (int i = 0; i <= (y2-y1); ++i)
 	{
-		outline_obstacle_c.push_back(Cell{x2, (y1 + i*dimGrid)});
+		outline_obstacle_c.push_back(Cell{x2, (y1 + i)});
 	}
 
 	//celle del contorno dell'ostacolo aventi stessa y = y1 e x compresa fra x1 e x2
 	for (int i = 1; i < (x2-x1); ++i)
 	{
-		outline_obstacle_c.push_back(Cell{(x1 + i*dimGrid), y1});
+		outline_obstacle_c.push_back(Cell{(x1 + i), y1});
 	}
 
 	return outline_obstacle_c;
